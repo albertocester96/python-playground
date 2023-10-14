@@ -2,22 +2,23 @@ def aggiungi_attività(attività, lista):
     lista.append(attività)
     return lista
 
-def domanda():
-    lista_attività = []
-    attività_utente= input("Quali attività vuoi ricordare?: ")
+def domanda(lista):
+    
+    attività_utente= input("Quale attività vuoi ricordare?: ")
 
     if attività_utente != "": 
-        aggiungi_attività(attività_utente, lista_attività)
-        print(lista_attività)
-        altro = input("Vuoi aggiungere altro?: ")
+        aggiungi_attività(attività_utente, lista)
+        print(lista)
+        altro = input("Vuoi aggiungere altro? [si/no]: ")
 
         if altro.lower() == "si":
-            domanda()
+            domanda(lista)
         else: 
             exit
     else:
         print("Non hai indicato nessun valore, riprova")
-        domanda()
-    return attività_utente
-    
-domanda()
+        domanda(lista)
+    return lista
+
+lista_attività = [] 
+domanda(lista_attività)
