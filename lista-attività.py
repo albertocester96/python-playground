@@ -9,8 +9,8 @@ def domanda(lista):
     if attività_utente != "": 
         aggiungi_attività(attività_utente, lista)
         print(lista)
-        altro = input("Vuoi aggiungere altro? [si/no]: ")
-
+        altro = input("Vuoi aggiungere altro? [Enter: si/no:]: ")
+       
         if altro.lower() == "si":
             domanda(lista)
         else: 
