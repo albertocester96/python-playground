@@ -2,7 +2,7 @@ import sys
 
 tipo_calcolo = input("Che tipo di operazione vuoi fare? Somma(1) - sottrazione(2) - moltiplicazione(3) - divisione(4) ")
 
-tipologie = {"sommare" : 1, "sottrarre": 2, "motiplicare": 3, "dividere": 4}
+tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
 
 def check_iniziale (chiave):
 
@@ -42,8 +42,9 @@ try:
         valore_finale = check_finale("sommare")
         check_null(valore_finale)
 
-        risultato = valore_iniziale + valore_finale
-        print(f"Il risultato della somma è: ", risultato)
+        if (valore_iniziale.isnumeric() & valore_finale.isnumeric()):
+            risultato = int(valore_iniziale) + int(valore_finale)
+            print(f"Il risultato della somma è: ", risultato)
 
     elif int(tipo_calcolo) == int(tipologie["sottrarre"]):
         check_iniziale()
