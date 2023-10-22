@@ -2,6 +2,7 @@
 tipo_calcolo = input("Che tipo di operazione vuoi fare? Somma(1) - sottrazione(2) - moltiplicazione(3) - divisione(4) ")
 
 tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
+tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
 
 def check_iniziale (chiave):
 
