@@ -1,21 +1,21 @@
 
 tipo_calcolo = input("Che tipo di operazione vuoi fare? Somma(1) - sottrazione(2) - moltiplicazione(3) - divisione(4) ")
 
-tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
-tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
+# tipologie = {"sommare" : 1, "sottrarre": 2, "moltiplicare": 3, "dividere": 4}
+dizionarioOperazioni = {1: "sommare", 2: "sottrarre", 3: "moltiplicare", 4: "dividere"}
 
-def check_iniziale (chiave):
+def check_iniziale (operazione):
 
     while True:
-        valore_ini= input("Qual è il primo valore che vuoi " + chiave + "?: ")
+        valore_ini= input("Qual è il primo valore che vuoi " + operazione + "?: ")
     
         return valore_ini
         
     
-def check_finale(chiave):
+def check_finale(operazione):
 
     while True:
-        valore_fin= input("Qual è il secondo valore che vuoi " + chiave + "?: ")
+        valore_fin= input("Qual è il secondo valore che vuoi " + operazione + "?: ")
     
         return valore_fin
 
@@ -35,13 +35,29 @@ def exit_program():
     print("Sto uscendo dal programma...")
     exit()
    
-def calcolo (chiave, tipo_calcolo):
+def calcolo(dizionario, tipo_calcolo):
+    operazione  = dizionario[int(tipo_calcolo)]
+    
+    valore_iniziale = check_iniziale(operazione)
+    check_null(valore_iniziale)
+    valore_finale = check_finale(operazione)
+    check_null(valore_finale)
+
+    if (valore_iniziale.isnumeric() & valore_finale.isnumeric()):
+        if (int(tipo_calcolo) == 1):
+            risultato = int(valore_iniziale) + int(valore_finale)
+    
+        print(f"Il risultato della {operazione} è: {risultato}")
+    else:
+        print("regno e'")
+
+def calcolo2 (operazione, tipo_calcolo):
 
     try: 
-        if int(tipo_calcolo) == int(chiave[1]):
-            valore_iniziale = check_iniziale(chiave)
+        if int(tipo_calcolo) == int(operazione[1]):
+            valore_iniziale = check_iniziale(operazione)
             check_null(valore_iniziale)
-            valore_finale = check_finale(chiave)
+            valore_finale = check_finale(operazione)
             check_null(valore_finale)
 
             if (valore_iniziale.isnumeric() & valore_finale.isnumeric()):
@@ -78,4 +94,4 @@ def calcolo (chiave, tipo_calcolo):
             print("Non hai inserito nessun valore")  
 
 
-calcolo(tipologie, tipo_calcolo)
+calcolo(dizionarioOperazioni, tipo_calcolo)
