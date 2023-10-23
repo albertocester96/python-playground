@@ -54,6 +54,7 @@ def calcolo(dizionario, tipo_calcolo):
 
         elif (int(tipo_calcolo) == 4):
             risultato = int(valore_iniziale) / int(valore_finale)
+            
     
         print(f"Il risultato della {operazione} è: {risultato}")
 
@@ -61,4 +62,9 @@ def calcolo(dizionario, tipo_calcolo):
         print("Il calcolo non è andato a buon fine")
 
 
-calcolo(dizionarioOperazioni, tipo_calcolo)
+if not tipo_calcolo.isnumeric() or int(tipo_calcolo) > 4:
+            print("Hai inserito un valore non supportato, riprova")
+
+else: 
+    calcolo(dizionarioOperazioni, tipo_calcolo)
+
