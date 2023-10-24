@@ -8,15 +8,16 @@ import math
 df = pd.read_csv("files/dolphin_insight_23102023_1756.csv", sep=";")
 
 header = df.columns #header del file
-ic(header)
 
-presse = df['strumento'].str.contains("Pressa",case= False)
-valori_presse = df.loc[presse]
+df['valore']= df['valore'].str.replace(",",".").astype(float).apply(math.ceil) #cambio "," su valori numerici con "." Converti in float e applica arrotondamento
 
-ic(valori_presse)
 
-valori_presse['valore']= valori_presse['valore'].str.replace(',', '.')
+ls_presse = df['strumento'].str.contains("Pressa",case= False) #filtro per parola "Pressa"
+ls_espansori = df['strumento'].str.contains("Espansori", case= False)
 
-media_presse = valori_presse['valore'].astype(float).sum()
-media_presse= math.ceil(media_presse)
-ic(media_presse)
+presse = df.loc[ls_presse] 
+espansori = df.loc[ls_espansori]
+
+somma_presse = presse['valore'].astype(float).apply(math.ceil).sum() #somma valori presse e arrotonda per eccesso
+
+ic("Le presse del reparto stampaggio hanno consumato " + str(somma_presse) + " kWh")
