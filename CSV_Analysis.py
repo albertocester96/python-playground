@@ -2,17 +2,21 @@
 
 
 import pandas as pd
-from icecream import ic 
+from icecream import ic
+import math 
 
 df = pd.read_csv("files/dolphin_insight_23102023_1756.csv", sep=";")
 
 header = df.columns #header del file
+ic(header)
 
-colonna_strumento = df['valore']
-lista_presse=[]
+presse = df['strumento'].str.contains("Pressa",case= False)
+valori_presse = df.loc[presse]
 
-for riga in df.loc[df['strumento'].str.contains('Pressa', case=False)['strumeto']]:
-    lista_presse.append(riga)
-    
+ic(valori_presse)
 
-ic(lista_presse)
+valori_presse['valore']= valori_presse['valore'].str.replace(',', '.')
+
+media_presse = valori_presse['valore'].astype(float).sum()
+media_presse= math.ceil(media_presse)
+ic(media_presse)
