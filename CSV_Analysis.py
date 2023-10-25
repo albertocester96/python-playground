@@ -40,9 +40,19 @@ valore_maggiore = df['percentuale'].max()
 index = df['percentuale'].idxmax()
 strumento_maggiore = df.at[index, 'strumento']
 
+#notifica valori a 0
+valori_nulli = df[df["valore"]==0]
+index_null = valori_nulli.index
+strumenti_nulli = df.loc[index_null, 'strumento']
+
 #print
 print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh")
 print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
 print("Il consumo maggiore è dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " % sul totale")
+
+if not valori_nulli.empty: #check if valori nulli is empty
+    for strumento in strumenti_nulli:
+        print("ATTENZIONE!: esistono dei valori a 0 da controllare. Sono i seguenti: " + strumento)
+    
 ic(df.sort_values(by="valore", ascending=False))
 
