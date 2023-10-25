@@ -20,7 +20,12 @@ ls_espansori = df['strumento'].str.contains("Espansori", case= False)#filtro per
 presse = df.loc[ls_presse] 
 espansori = df.loc[ls_espansori]
 
+ic(presse)
+ic(df)
+
+consumo_totale = df['valore'].astype(float).apply(math.ceil).sum() #somma valori nella colonna 'valore' per restituite somma: consumo totale periodo
 somma_presse = presse['valore'].astype(float).apply(math.ceil).sum() #somma valori presse e arrotonda per eccesso
 
-print("Le presse del reparto stampaggio hanno consumato " + str(somma_presse) + " kWh, dal " + data_inizio + " al " + data_fine)
+print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + "ha consumato " + str(consumo_totale) +  " kWh")
+print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
 
