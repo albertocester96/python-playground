@@ -1,11 +1,15 @@
 #Questo script ha l'obiettivo di analizzare i dati CSV per fare delle somme, medie o ricercare valori specifici
 
+
 #import libraies
 import pandas as pd
 from icecream import ic
 import math 
+import sys
 
-df = pd.read_csv("files/dolphin_insight_23102023_1756.csv", sep=";")
+file_name = sys.argv[1]
+
+df = pd.read_csv(file_name)
 
 header = df.columns #header del file
 
@@ -48,7 +52,7 @@ strumenti_nulli = df.loc[index_null, 'strumento']
 #print
 print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh")
 print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
-print("Il consumo maggiore è dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " % sul totale")
+print("Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale")
 
 if not valori_nulli.empty: #check if valori nulli is empty
     for strumento in strumenti_nulli:
