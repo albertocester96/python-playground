@@ -4,6 +4,8 @@ from tkinter import filedialog
 from icecream import ic
 import pandas as pd
 import subprocess
+import json
+
 
 #color palette
 color_palette = {
@@ -21,6 +23,7 @@ def crea_dataframe(path):
     process= subprocess.run(["python3", file_to_run, "dati.csv"])
 
 
+
 #funzione ask apertura file
 def carica_file():
     file_path = filedialog.askopenfile()
@@ -33,34 +36,26 @@ def carica_file():
 #creare finestra principale
 window = tk.Tk()
 
-'''
-crea frame ttk con un tema
-frame = ttk.Frame(window)
-frame.pack()
-
-definizione oggetto style
-style = ttk.Style()
-
-crea stili
-style.configure("TButton", background= "white")
-'''
-
 #root parameters
 window.title("CSV reader")
-window.geometry("400x50")
-#window.config(background="white")
+window.geometry("400x100")
+
+#leggi dati json 
+with open("risultati.json", "r") as file:
+    dati_da_passare = json.load(file)
+
 
 #crea testo
 label= tk.Label(window, text="Clicca il pulsante per cercare il file csv")
+label1 = tk.Label(window, text=dati_da_passare["Consumo Totale"])
 
 #crea bottone carica file
 File_button = tk.Button(window, text="Carica file", command= carica_file)
 
-
-
-#esegui bottoni
+#layout bottoni
 label.pack()
 File_button.pack()
+label1.pack()
 
 
 #esegui applicazione

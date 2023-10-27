@@ -6,6 +6,7 @@ import pandas as pd
 from icecream import ic
 import math 
 import sys
+import json
 
 file_name = sys.argv[1]
 
@@ -54,9 +55,25 @@ print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha con
 print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
 print("Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale")
 
+
+
 if not valori_nulli.empty: #check if valori nulli is empty
     for strumento in strumenti_nulli:
         print("ATTENZIONE!: esistono dei valori a 0 da controllare. Sono i seguenti: " + strumento)
     
+#dati da passare 
+dati_da_passare = {
+    "Consumo Totale": "L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh",
+    "Consumo presse": "Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh",
+    "Consumo maggiore": "Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale",
+    "valori nulli": "ATTENZIONE!: esistono dei valori a 0 da controllare. Sono i seguenti: " + strumento
+}
+
+with open("risultati.json", "w") as file:
+    json.dump(dati_da_passare, file)
+
+import subprocess
+subprocess.run(["python3", "Desktop_app_csv.py", "risultati.json"])
+
 ic(df.sort_values(by="valore", ascending=False))
 
