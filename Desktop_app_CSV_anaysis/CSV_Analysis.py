@@ -38,11 +38,16 @@ df['percentuale'] = df['percentuale'].apply(lambda x: round(x, 1))
 
 
 #extract strumento 
-df['strumento'] = df['strumento'].apply(lambda words: "".join(words[:words.index("Energia")])) #estrai le parole dall'indice 0 a la parola "Energia"
+df['strumento'] = df['strumento'].apply(lambda words: "".join(words[:words.index(" Energia")])) #estrai le parole dall'indice 0 a la parola "Energia"
 
 
 #trova valore strumento maggiore
+
 valore_maggiore = df['percentuale'].max()
+valore_maggiore_perc = df['percentuale'].apply(lambda x: "{:.0f}%".format(x))
+
+
+ic(valore_maggiore)
 index = df['percentuale'].idxmax()
 strumento_maggiore = df.at[index, 'strumento']
 
@@ -81,5 +86,5 @@ df_data = pd.DataFrame(dati_da_passare, index= index)
 df_data.to_csv("Desktop_app_CSV_anaysis/Consumi_data.csv", index=False)
 
 
-#ic(df.sort_values(by="valore", ascending=False))
+ic(df.sort_values(by="valore", ascending=False))
 

@@ -19,7 +19,7 @@ window = tk.Tk()
 
 #root parameters
 window.title("CSV reader")
-window.geometry("400x100")
+window.geometry("1280x720")
 
 #comunicazione con "back-end"
 def communication(path):
@@ -37,16 +37,16 @@ def communication(path):
     consumo_totale = df_data["Consumo Totale"].iloc[0]
     consumo_presse = df_data["Consumo presse"].iloc[0]
     strumento_maggiore = df_data["Strumento maggiore"].iloc[0]
-    consumo_maggiore = df.data["Consumo maggiore"]
+    consumo_maggiore = df_data["Consumo maggiore"].iloc[0]
     valori_nulli = df_data["valori nulli"].iloc[0]
 
     
     #crea etichette consumi
     label1= tk.Label(window, text=f"Il consumo totale dell'azienda nel periodo {data_inizio} al {data_fine} è stato di {consumo_totale} kwh") 
     label2= tk.Label(window, text=f"Le presse del reparto stampaggio nello stesso periodo hanno consumato {consumo_presse} kwh")
-    label3= tk.Label(window, text=f"Il consumo maggiore e dato da {strumento_maggiore} con il {consumo_maggiore} percentuale sul totale")
+    label3= tk.Label(window, text=f"Il consumo maggiore è dato da {strumento_maggiore} con il {consumo_maggiore} % sul totale")
     if valori_nulli:
-        label4= tk.label(window,text= f"ATTENZIONE: Ci sono delle macchine che hanno un valore nullo!: {valori_nulli} ")
+        label4= tk.Label(window,text= f"ATTENZIONE: Ci sono delle macchine che hanno un valore nullo!: {valori_nulli} ")
 
     #layout etichette
     label1.pack()
