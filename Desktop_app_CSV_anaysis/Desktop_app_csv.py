@@ -4,8 +4,6 @@ from tkinter import filedialog
 from icecream import ic
 import pandas as pd
 import subprocess
-import json
-
 
 #color palette
 color_palette = {
@@ -14,6 +12,14 @@ color_palette = {
     "primary": "red",
     "secondary": "#F6A884"
 }
+
+
+#creare finestra principale
+window = tk.Tk()
+
+#root parameters
+window.title("CSV reader")
+window.geometry("400x100")
 
 #comunicazione con "back-end"
 def communication(path):
@@ -24,9 +30,30 @@ def communication(path):
 
     #read consumi
     df_data = pd.read_csv("Desktop_app_CSV_anaysis/Consumi_data.csv") #leggi i consumi passati dal back-end
-    label1= tk.Label(window, text=df_data["Consumo Totale"]) #configura testo etichetta
-    label1.pack()
 
+    #crea variaibili per valore consumi
+    data_inizio = df_data["Data inizio"].iloc[0]
+    data_fine = df_data["Data fine"].iloc[0]
+    consumo_totale = df_data["Consumo Totale"].iloc[0]
+    consumo_presse = df_data["Consumo presse"].iloc[0]
+    strumento_maggiore = df_data["Strumento maggiore"].iloc[0]
+    consumo_maggiore = df.data["Consumo maggiore"]
+    valori_nulli = df_data["valori nulli"].iloc[0]
+
+    
+    #crea etichette consumi
+    label1= tk.Label(window, text=f"Il consumo totale dell'azienda nel periodo {data_inizio} al {data_fine} è stato di {consumo_totale} kwh") 
+    label2= tk.Label(window, text=f"Le presse del reparto stampaggio nello stesso periodo hanno consumato {consumo_presse} kwh")
+    label3= tk.Label(window, text=f"Il consumo maggiore e dato da {strumento_maggiore} con il {consumo_maggiore} percentuale sul totale")
+    if valori_nulli:
+        label4= tk.label(window,text= f"ATTENZIONE: Ci sono delle macchine che hanno un valore nullo!: {valori_nulli} ")
+
+    #layout etichette
+    label1.pack()
+    label2.pack()
+    label3.pack()
+    label4.pack()
+    
 #funzione ask apertura file
 def carica_file():
     file_path = filedialog.askopenfile()
@@ -36,13 +63,6 @@ def carica_file():
     else:
         print("Nessun file selezionato")
    
-
-#creare finestra principale
-window = tk.Tk()
-
-#root parameters
-window.title("CSV reader")
-window.geometry("400x100")
 
 #crea testo
 label= tk.Label(window, text="Clicca il pulsante per cercare il file csv")
@@ -54,8 +74,6 @@ File_button = tk.Button(window, text="Carica file", command= carica_file)
 #layout bottoni
 label.pack()
 File_button.pack()
-
-
 
 #esegui applicazione
 window.mainloop()

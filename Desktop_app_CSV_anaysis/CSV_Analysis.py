@@ -8,9 +8,10 @@ import math
 import sys
 import subprocess
 
-#file_name = sys.argv[1]
+file_name = sys.argv[1]
 
-df = pd.read_csv("Desktop_app_CSV_anaysis/files/dolphin_insight_23102023_1756.csv",  sep=";")
+#df = pd.read_csv("Desktop_app_CSV_anaysis/files/dolphin_insight_23102023_1756.csv",  sep=";")
+df = pd.read_csv(file_name)
 
 header = df.columns #header del file
 
@@ -73,12 +74,12 @@ dati_da_passare = {
     "valori nulli": strumenti_nulli
 }
 
-index = ["dd/mm/yyyy 00:00", "dd-mm-yyyy 00:00"]
+index = ["dd/mm/yyyy 00:00"]
 
 #comunicazione con Desktop_app
 df_data = pd.DataFrame(dati_da_passare, index= index)
 df_data.to_csv("Desktop_app_CSV_anaysis/Consumi_data.csv", index=False)
-subprocess.run(["python3", "Desktop_app_CSV_anaysis/Desktop_app_csv.py", "Consumi_data.csv"])
+
 
 #ic(df.sort_values(by="valore", ascending=False))
 
