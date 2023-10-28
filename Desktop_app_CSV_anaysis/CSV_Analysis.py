@@ -76,7 +76,7 @@ dati_da_passare = {
     "Consumo presse": somma_presse,
     "Strumento maggiore": strumento_maggiore,
     "Consumo maggiore": valore_maggiore,
-    "valori nulli": strumenti_nulli
+    "valori nulli": strumento
 }
 
 index = ["dd/mm/yyyy 00:00"]
