@@ -56,14 +56,6 @@ valori_nulli = df[df["valore"]==0]
 index_null = valori_nulli.index
 strumenti_nulli = df.loc[index_null, 'strumento']
 
-'''
-#print
-print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh")
-print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
-print("Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale")
-'''
-
-
 if not valori_nulli.empty: #check if valori nulli is empty
     for strumento in strumenti_nulli:
         strumenti_nulli  = strumento
@@ -83,7 +75,7 @@ index = ["dd/mm/yyyy 00:00"]
 
 #comunicazione con Desktop_app
 df_data = pd.DataFrame(dati_da_passare, index= index)
-df_data.to_csv("Desktop_app_CSV_anaysis/Consumi_data.csv", index=False)
+df_data.to_csv("Csv_reader/csv_files/Consumi_data.csv", index=False)
 
 
 ic(df.sort_values(by="valore", ascending=False))
