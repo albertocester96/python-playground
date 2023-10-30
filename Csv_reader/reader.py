@@ -75,7 +75,8 @@ index = ["dd/mm/yyyy 00:00"]
 
 #comunicazione con Desktop_app
 df_data = pd.DataFrame(dati_da_passare, index= index)
-df_data.to_csv("Csv_reader/csv_files/Consumi_data.csv", index=False)
+ic()
+df_data.to_csv("Csv_reader/csv_files/consumi_data.csv", index=False)
 
 
 ic(df.sort_values(by="valore", ascending=False))

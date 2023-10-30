@@ -1,9 +1,8 @@
 import tkinter as tk
 import pandas as pd
 import subprocess
-
-import carica_file
-
+from icecream import ic
+from tkinter import filedialog 
 
 #creare finestra principale
 window = tk.Tk()
@@ -16,6 +15,13 @@ window.geometry("800x500")
 #crea testo
 label= tk.Label(window, text="CLICCA IL PULSANTE PER CERCARE IL FILE CSV DA ANALIZZARE",  font=("Helvetiva", 16))
 
+#funzione ask apertura file
+def carica_file():
+    file_path = filedialog.askopenfile()
+    if file_path:
+        communication(file_path)
+    else:
+        print("Nessun file selezionato")
 
 #crea bottone carica file
 File_button = tk.Button(window, text="Carica file", command= carica_file)
@@ -27,14 +33,15 @@ File_button.pack()
 
 
 #comunicazione con "back-end"
+
 def communication(path):
     df = pd.read_csv(path, sep=";")
     df.to_csv("Csv_reader/csv_files/dati.csv", index=False)
     file_to_run = "Csv_reader/reader.py"
-    process= subprocess.run(["python3", file_to_run, "Csv_reader/dati.csv"])
+    process= subprocess.run(["python3", file_to_run, "Csv_reader/csv_files/dati.csv"])
 
     #read consumi
-    df_data = pd.read_csv("Csv_reader/Consumi_data.csv") #leggi i consumi passati dal back-end
+    df_data = pd.read_csv("Csv_reader/csv_files/consumi_data.csv") #leggi i consumi passati dal back-end
 
     #crea variaibili per valore consumi
     data_inizio = df_data["Data inizio"].iloc[0]
