@@ -11,17 +11,21 @@ window = tk.Tk()
 #root parameters
 window.title("CSV reader")
 window.geometry("800x500")
+filedialog_called = False
 
 #crea testo
-label= tk.Label(window, text="CLICCA IL PULSANTE PER CERCARE IL FILE CSV DA ANALIZZARE",  font=("Helvetiva", 16))
+label = tk.Label(window, text="CLICCA IL PULSANTE PER CERCARE IL FILE CSV DA ANALIZZARE",  font=("Helvetiva", 16))
+
 
 #funzione ask apertura file
 def carica_file():
     file_path = filedialog.askopenfile()
     if file_path:
-        communication(file_path)
+        communication(file_path)    
     else:
         print("Nessun file selezionato")
+
+        
 
 #crea bottone carica file
 File_button = tk.Button(window, text="Carica file", command= carica_file)
@@ -30,6 +34,12 @@ File_button = tk.Button(window, text="Carica file", command= carica_file)
 #layout bottoni
 label.pack()
 File_button.pack()
+
+#crea box
+global textbox 
+textbox = tk.Text(window, padx=10, pady=10, width=100, height=10)
+textbox.pack()
+
 
 
 #comunicazione con "back-end"
@@ -52,20 +62,19 @@ def communication(path):
     consumo_maggiore = df_data["Consumo maggiore"].iloc[0]
     valori_nulli = df_data["valori nulli"].iloc[0]
 
-    
-    #crea etichette consumi
-    label1= tk.Label(window, text=f"Il consumo totale dell'azienda nel periodo {data_inizio} al {data_fine} è stato di {consumo_totale} kwh",) 
-    label2= tk.Label(window, text=f"Le presse del reparto stampaggio nello stesso periodo hanno consumato {consumo_presse} kwh")
-    label3= tk.Label(window, text=f"Il consumo maggiore è dato da {strumento_maggiore} con il {consumo_maggiore} % sul totale")
-    if valori_nulli:
-        label4= tk.Label(window,text= f"ATTENZIONE: Ci sono delle macchine che hanno un valore nullo!: {valori_nulli} ")
+    #delete content on textbox
+    textbox.delete("1.0", "end")
 
-    #layout etichette
-    label1.pack()
-    label2.pack()
-    label3.pack()
-    label4.pack()
-    
+    textbox.insert("1.0",
+            f"Il consumo totale dell'azienda nel periodo {data_inizio} al {data_fine} è stato di {consumo_totale} kwh \n"
+            f"Le presse del reparto stampaggio nello stesso periodo hanno consumato {consumo_presse} kwh \n"
+            f"Il consumo maggiore è dato da {strumento_maggiore} con il {consumo_maggiore} % sul totale \n"
+        )
+    if valori_nulli:
+        textbox.insert("end",
+            f"ATTENZIONE: Ci sono delle macchine che hanno un valore nullo!: {valori_nulli} "
+        )
+  
 
 #esegui applicazione
 window.mainloop()
