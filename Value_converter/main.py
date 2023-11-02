@@ -7,7 +7,7 @@ window.title("Converter")
 window.geometry("500x200")
 
 euro_value = 1
-dollar_value = 2
+dollar_value = 1.05582
 yen_value = 3
 pound_value = 4
 
@@ -31,7 +31,7 @@ def Converter(currency_value,input_value):
         if float_value: 
                 input_value = float(input_value)
                 ic(input_value)
-                new_value = input_value * input_value/currency_value #formula di conversione
+                new_value = input_value * currency_value #formula di conversione
                 return new_value 
         else:
             l_result.config(text="Non hai inserito un valore valido da convertire! \n Prova ad inserire un numero o cambiare la virgola con un punto")
