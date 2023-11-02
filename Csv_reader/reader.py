@@ -6,10 +6,11 @@ import pandas as pd
 from icecream import ic
 import math 
 import sys
-import json
+import subprocess
 
 file_name = sys.argv[1]
 
+#df = pd.read_csv("Desktop_app_CSV_anaysis/files/dolphin_insight_23102023_1756.csv",  sep=";")
 df = pd.read_csv(file_name)
 
 header = df.columns #header del file
@@ -37,11 +38,16 @@ df['percentuale'] = df['percentuale'].apply(lambda x: round(x, 1))
 
 
 #extract strumento 
-df['strumento'] = df['strumento'].apply(lambda words: "".join(words[:words.index("Energia")])) #estrai le parole dall'indice 0 a la parola "Energia"
+df['strumento'] = df['strumento'].apply(lambda words: "".join(words[:words.index(" Energia")])) #estrai le parole dall'indice 0 a la parola "Energia"
 
 
 #trova valore strumento maggiore
+
 valore_maggiore = df['percentuale'].max()
+valore_maggiore_perc = df['percentuale'].apply(lambda x: "{:.0f}%".format(x))
+
+
+ic(valore_maggiore)
 index = df['percentuale'].idxmax()
 strumento_maggiore = df.at[index, 'strumento']
 
@@ -50,30 +56,28 @@ valori_nulli = df[df["valore"]==0]
 index_null = valori_nulli.index
 strumenti_nulli = df.loc[index_null, 'strumento']
 
-#print
-print("L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh")
-print("Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh")
-print("Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale")
-
-
-
 if not valori_nulli.empty: #check if valori nulli is empty
     for strumento in strumenti_nulli:
-        print("ATTENZIONE!: esistono dei valori a 0 da controllare. Sono i seguenti: " + strumento)
+        strumenti_nulli  = strumento
     
 #dati da passare 
 dati_da_passare = {
-    "Consumo Totale": "L'azienda nel periodo dal " + data_inizio + " al " + data_fine + " ha consumato " + str(consumo_totale) +  " kWh",
-    "Consumo presse": "Le presse del reparto stampaggio nello stesso periodo hanno consumato " + str(somma_presse) + " kWh",
-    "Consumo maggiore": "Il consumo maggiore e dato da " + strumento_maggiore + "con il " + str(valore_maggiore) +  " percentuale sul totale",
-    "valori nulli": "ATTENZIONE!: esistono dei valori a 0 da controllare. Sono i seguenti: " + strumento
+    "Data inizio": data_inizio,
+    "Data fine": data_fine,
+    "Consumo Totale": consumo_totale,
+    "Consumo presse": somma_presse,
+    "Strumento maggiore": strumento_maggiore,
+    "Consumo maggiore": valore_maggiore,
+    "valori nulli": strumento
 }
 
-with open("risultati.json", "w") as file:
-    json.dump(dati_da_passare, file)
+index = ["dd/mm/yyyy 00:00"]
 
-import subprocess
-subprocess.run(["python3", "Desktop_app_csv.py", "risultati.json"])
+#comunicazione con Desktop_app
+df_data = pd.DataFrame(dati_da_passare, index= index)
+ic()
+df_data.to_csv("Csv_reader/csv_files/consumi_data.csv", index=False)
+
 
 ic(df.sort_values(by="valore", ascending=False))
 
