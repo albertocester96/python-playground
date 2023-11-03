@@ -1,22 +1,16 @@
 import tkinter as tk
 from icecream import ic
 
+
 #inizializza finestra
 window = tk.Tk()
 window.title("Converter")
 window.geometry("500x200")
 
-euro_value = 1
-dollar_value = 1.05582
-yen_value = 3
-pound_value = 4
 
-currencies = {
-    "euro": euro_value,
-    "dollar": dollar_value,
-    "yen": yen_value,
-    "pound": pound_value
-}
+currencies = []
+
+
 
 #crea entry form
 entry = tk.Entry(window)
