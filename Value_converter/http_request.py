@@ -6,5 +6,6 @@ def get_response():
     headers = {"accept": "application/json"}
 
     response = requests.get(url, headers=headers)
+    response = response.text
 
     return response

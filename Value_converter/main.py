@@ -1,6 +1,7 @@
 import tkinter as tk
 from icecream import ic
 
+from http_request import get_response
 
 #inizializza finestra
 window = tk.Tk()
@@ -10,7 +11,7 @@ window.geometry("500x200")
 
 currencies = []
 
-
+ic(get_response)
 
 #crea entry form
 entry = tk.Entry(window)
