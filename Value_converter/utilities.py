@@ -1,6 +1,6 @@
 
 #check if float
-def is_float(value):
+def try_float(value):
     try:
         value = float(value)
         return value

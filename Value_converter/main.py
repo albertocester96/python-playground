@@ -2,7 +2,7 @@ import tkinter as tk
 from icecream import ic
 
 from http_request import get_response
-from utilities import is_float
+from utilities import try_float
 
 #init window
 window = tk.Tk()
@@ -17,8 +17,6 @@ entry.pack()
 #get json file from http request
 currencies = get_response()
 curr_list = currencies["rates"]
-
-
 
 
 #chose currency
@@ -37,16 +35,16 @@ def get_selection():
         index = cur_selection[0]
         selection = menu_list.get(index)
         print(selection)
+        
+        return selection
     else: 
          print("non ci sono elementi selezionati")
-
-get_selection()
 
 #converts input value to new value based on exchange rate from  json file 
 def Converter(currency_value,input_value):
         input_value = str(input_value.get())
         
-        float_value = is_float(input_value) #check if float
+        float_value = try_float(input_value) #check if float
 
         if float_value: 
                 input_value = float(input_value)
@@ -59,7 +57,8 @@ def Converter(currency_value,input_value):
 
 #show result of the conversion
 def show_result():
-    result = Converter(currencies["dollar"],entry)
+
+    result = Converter(curr_list[get_selection()],entry)
     l_result.config(text=result)
 
 #create button "convert"
