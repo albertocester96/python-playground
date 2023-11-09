@@ -4,15 +4,25 @@ from icecream import ic
 from http_request import get_response
 from utilities import try_float
 
-#init window
+#init window and frame
 window = tk.Tk()
 window.title("Converter")
 window.geometry("500x200")
 
+window.columnconfigure(0, weight=1)
+window.columnconfigure(1, weight=1)
+window.columnconfigure(2, weight=1)
 
 #create entry form
 entry = tk.Entry(window)
-entry.pack()
+entry.grid(column=0, row=1)
+
+#create label 
+input_value = tk.Label(window, text="Input value", font=("helvetiva", 16), justify= "left")
+input_value.grid(column=0,row=0)
+
+l_result = tk.Label(window, text="")
+l_result.grid(column=2, row=0, rowspan= 2)
 
 #get json file from http request
 currencies = get_response()
@@ -20,12 +30,13 @@ curr_list = currencies["rates"]
 
 
 #chose currency
-menu_list = tk.Listbox(window, height=3, border=1, selectmode=tk.SINGLE) #create menu
+menu_list = tk.Listbox(window, height=10, border=1, selectmode=tk.SINGLE) #create menu
+menu_list.grid(column= 0, row=1)
 
 for curr in curr_list:
       menu_list.insert(tk.END, curr) #insert currency name at the end every cicle
 
-menu_list.pack()
+
 
 def get_selection():
 
@@ -63,11 +74,8 @@ def show_result():
 
 #create button "convert"
 converter_button = tk.Button(window, text="Converti", command=show_result)
-converter_button.pack()
+converter_button.grid(column=1, row=0, rowspan=2)
 
-#create label 
-l_result = tk.Label(window, text="")
-l_result.pack()
 
 window.mainloop()
 
