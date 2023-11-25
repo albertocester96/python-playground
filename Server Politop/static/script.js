@@ -1,33 +1,37 @@
-
-// Ascolta l'evento DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
-
-    // Ascolta il click sul bottone con id "file"
     document.getElementById("file").addEventListener("click", function() {
 
         var fileInput = document.createElement('input');
         fileInput.type = "file";
-        
-        //Ascolta l'evento change sull'elemento input file
-        fileInput.addEventListener('change', function (event){
-            var selectedFile= event.target.files[0];
-            
+
+        // Ascolta l'evento change sull'elemento input file
+        fileInput.addEventListener('change', function(event) {
+            var selectedFile = event.target.files[0];
 
             var formData = new FormData();
             formData.append("file", selectedFile);
 
-            //Richiesta al server quando il bottone viene cliccato
+            // Richiesta al server quando il bottone viene cliccato
             fetch('/upload', {
-                method: 'POST', //metodo richiesta
+                method: 'POST',
+                body: formData, // Passa l'oggetto FormData come corpo della richiesta
+                // Imposta l'intestazione Content-Type
+                headers: {
+                    'Content-Type': 'application/octet-stream'
+                }
             })
-
-            .then(response=>response.json())
+            .then(response => {
+                console.log("Stato:", response.status);
+                return response.json();
+            })
             .then(data => {
-                alert("File inviato con successo");
-
+                console.log("Dati ricevuti:", data);
+                alert("Operazione completata con successo");
             })
-
-            .catch(error => console.error("Errore durante l'invio del file"));
+            .catch(error => {
+                console.error("Errore:", error);
+                alert("Si è verificato un errore");
+            });
         });
 
         // Simula il click sull'elemento input file
