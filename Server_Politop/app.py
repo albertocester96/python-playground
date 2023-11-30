@@ -1,7 +1,7 @@
 from flask import  Flask, render_template,jsonify, request
 import os
 
-from Server_Politop.
+from esegui_file import communication
 
 
 app = Flask(__name__)
@@ -21,15 +21,14 @@ def upload_file():
 
 
         #Salva il file nella cartella 'uploads'
-        if not os.path.exists('Server_Politop/uploads'):
-            print("La cartella non esiste")
-        else:
-            upload_file.save(os.path.join('Server_Politop/uploads', upload_file.filename))
+        upload_file_path = os.path.join('Server_Politop/uploads', upload_file.filename)
+        upload_file.save(upload_file_path)
 
+        result= communication(upload_file_path)
         
-
         #Restituisci una risposta JSON
-        return jsonify({"success": True})
+        return jsonify(result)
+    
     except Exception as e:
         return jsonify({"Errore": str(e)})
     

@@ -20,4 +20,14 @@ def communication(path):
     consumo_maggiore = df_data["Consumo maggiore"].iloc[0]
     valori_nulli = df_data["valori nulli"].iloc[0]
 
-    
+    data_to_send = {
+        "data_inizio": str(data_inizio),
+        "data_fine": str(data_fine),
+        "consumo_totale": float(consumo_totale),
+        "consumo_presse": int(consumo_presse),
+        "strumento_maggiore": str(strumento_maggiore),
+        "consumo_maggiore": float(consumo_maggiore),
+        "valori_nulli": str(valori_nulli)
+    }
+
+    return data_to_send

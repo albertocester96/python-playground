@@ -26,7 +26,16 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 console.log("Dati ricevuti:", data);
-                alert("Operazione completata con successo");
+                
+                //aggiorna contenuto html
+                var consumo_maggiore = document.getElementById("consumo-maggiore")
+                if (consumo_maggiore) {
+                    consumo_maggiore.innerText = data.consumo_maggiore + " %";
+                } else {
+                    console.error("L'elemento 'consumo-maggiore' non è stato trovato.");
+                }
+              
+                
             })
             .catch(error => {
                 console.error("Errore:", error);
