@@ -1,3 +1,24 @@
 h1 {
     color: blue;
 }
+
+h2 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 25px;
+    font-style: bold;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    padding: 10px;
+}
+
+.item{
+    text-align: center;
+    border: 2px solid black;
+}
