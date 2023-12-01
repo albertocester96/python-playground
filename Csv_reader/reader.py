@@ -59,6 +59,11 @@ strumenti_nulli = df.loc[index_null, 'strumento']
 if not valori_nulli.empty: #check if valori nulli is empty
     for strumento in strumenti_nulli:
         strumenti_nulli  = strumento
+
+#trova valore compressori
+riga_compressori = df[df["strumento"].str.contains("QG Compressori")]
+consumo_compressori = riga_compressori["valore"].values[0]
+ic(consumo_compressori)
     
 #dati da passare 
 dati_da_passare = {
@@ -68,7 +73,8 @@ dati_da_passare = {
     "Consumo presse": somma_presse,
     "Strumento maggiore": strumento_maggiore,
     "Consumo maggiore": valore_maggiore,
-    "valori nulli": strumento
+    "valori nulli": strumento,
+    "Consumo compressori": consumo_compressori
 }
 
 index = ["dd/mm/yyyy 00:00"]
