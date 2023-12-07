@@ -25,13 +25,14 @@ document.getElementById("file").addEventListener("click", function() {
             console.log("Dati ricevuti:", data);
             
             //aggiorna contenuto html
-            var consumo_maggiore = document.getElementById("consumo-maggiore")
+            var consumo_maggiore = document.getElementById("consumo-maggiore")+
+            // Apply styles to the updated element using JavaScript
             if (consumo_maggiore) {
-                consumo_maggiore.innerText = data.consumo_maggiore + " %";
+                consumo_maggiore.innerText = data.consumo_maggiore;
             } else {
-                console.error("L'elemento 'consumo-maggiore' non è stato trovato.");
+                console.error("L'id html 'consumo-maggiore' non è stato trovato.");
             }
-
+/*
             //dati per grafico
             var chartElement = document.getElementById("chart");
 
@@ -41,7 +42,7 @@ document.getElementById("file").addEventListener("click", function() {
                     [data.strumento_maggiore, data.consumo_compressori]
                 ])
 
-            //Opzioni grafico
+            
                 
             //Creazione grafico
             var chart = new google.visualization.ColumnChart(chartElement);
@@ -51,7 +52,7 @@ document.getElementById("file").addEventListener("click", function() {
                 console.error("L'elemento chart non è stato caricato")
             }
             
-        
+*/
             
         })
         .catch(error => {

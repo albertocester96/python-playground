@@ -16,6 +16,14 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">google.load('visualization', '1.0', {'packages':['corechart']});</script>
 
+    <!-- Collegamento al font Mona Sans da Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap" rel="stylesheet">
+
+    <!-- Collegamento icone-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 
 </head>
 <body>
@@ -24,14 +32,21 @@
    <button id="file">Scegli file</button>
 
    <div class="grid">
-    <div class="item"> 
-        <div id="chart"> </div>
-        <h2> Consumo maggiore </h2>
-        <p id="consumo-maggiore"> </p>
+    <div class="item">
+        <div class="item-container">
+            <div class="title-with-icon"> 
+                <span class="material-symbols-outlined"> apartment </span>
+                <h2 class="title"> Consumo mensile </h2>
+            </div>
+            <div class="value-container">
+                <!--<p class="consumo-totale consumi"> 43 </p> -->
+                <span> % </span>
+                <p id="consumo-maggiore"> </p>
+            </div>
+            <p class="sottotitolo"> Comparato al mese precedente </p>
+        </div>
     </div>
     <div class="item"> 
-        <h2> Consumo Totale </h2>
-        <p id="consumo-totale"> </p>
     </div>
     <div class="item"> 
         <h2> Consumo Presse </h2>

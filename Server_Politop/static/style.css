@@ -1,24 +1,93 @@
-h1 {
-    color: blue;
+:root{
+    --primary-color: black; /* Definisce il colore primario */
+  --secondary-color: white; /* Definisce il colore secondario */
+  --accent-color: #0FA8D3 ; /* Definisce un colore di accento */
+  --text-color: black; /* Colore del testo principale */
+  --background-color: #fafafa; /* Colore di sfondo principale */
 }
 
-h2 {
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 200,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
+body{
+    font-family: 'Red Hat Display', sans-serif;
+    background-color: var(--background-color);
+}
+
+.title{
     font-size: 20px;
+    padding-left: 10px;
+    font-weight: 200;
+  
 }
 
-p {
-    font-size: 25px;
-    font-style: bold;
+
+.title-with-icon{
+    display: flex;
+    align-items: center;
+    margin-bottom: -5px;
+    }
+
+.consumi {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 2px;   
+}
+
+.consumi-maggiore{
+    font-size: 40px;
 }
 
 .grid{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    padding: 10px;
+    gap: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .item{
-    text-align: center;
-    border: 2px solid black;
+    text-align: left;
+    background-color: var(--secondary-color);
+    box-shadow: 0px 5px 10px lightgrey;
+    border-radius: 15px;
+    height: 100%;
+    line-height: 1.5em;
 }
+
+.item:first-child{
+    color: var(--secondary-color);
+    background-color: var(--accent-color) ;
+}
+
+.item-container{
+    padding: 30px;
+}
+
+.value-container{
+    display: flex;
+    align-items: center;
+
+}
+
+.value-container span{
+    font-size: 40px; 
+    font-weight: 500;
+    padding-left: 5px;  
+}
+
+.sottotitolo{
+    letter-spacing: 1px;
+    font-weight: 300;
+    font-size: 16px;
+    color: rgb(63, 63, 63)
+}
+
